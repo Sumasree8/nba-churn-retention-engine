@@ -1,0 +1,10 @@
+# ──────────────────────────────────────────────────────────────────────────
+# Dashboard / web runtime ONLY.
+# This is the file Streamlit Community Cloud installs, so keep it lightweight.
+# Full ML / API / MLOps stack lives in requirements-ml.txt (installed by `make install`).
+# ──────────────────────────────────────────────────────────────────────────
+streamlit>=1.28.0
+pandas>=2.1.0
+numpy>=1.26.0
+plotly>=5.17.0
+python-dotenv>=1.0.0

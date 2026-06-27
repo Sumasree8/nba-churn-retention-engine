@@ -1,0 +1,89 @@
+# DVC Pipeline Configuration
+# ===========================
+# Tracks data, model artifacts, and pipeline stages for reproducibility.
+# Install: pip install dvc dvc-s3
+
+stages:
+  generate_data:
+    cmd: python src/data/generate_data.py --n 50000 --output data/raw/saas_churn_dataset.csv
+    deps:
+      - src/data/generate_data.py
+    params:
+      - config/config.yaml:
+          - data.n_records
+          - data.random_state
+    outs:
+      - data/raw/saas_churn_dataset.csv
+
+  feature_engineering:
+    cmd: python -c "
+      import sys; sys.path.insert(0, '.');
+      import pandas as pd;
+      from src.features.feature_engineering import engineer_features;
+      df = pd.read_csv('data/raw/saas_churn_dataset.csv');
+      engineer_features(df).to_csv('data/processed/engineered_features.csv', index=False)
+      "
+    deps:
+      - src/features/feature_engineering.py
+      - data/raw/saas_churn_dataset.csv
+    outs:
+      - data/processed/engineered_features.csv
+
+  train_models:
+    cmd: python -c "
+      import sys; sys.path.insert(0, '.');
+      import pandas as pd, numpy as np, joblib;
+      from sklearn.model_selection import train_test_split;
+      from sklearn.preprocessing import StandardScaler;
+      from src.features.feature_engineering import MODEL_FEATURES;
+      from src.models.train import train_all_models;
+      df = pd.read_csv('data/processed/engineered_features.csv');
+      X = df[MODEL_FEATURES].fillna(0).values; y = df['churned'].values;
+      X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42);
+      sc = StandardScaler(); X_tr_s = sc.fit_transform(X_tr); X_te_s = sc.transform(X_te);
+      joblib.dump(sc, 'models/artifacts/scaler.pkl');
+      train_all_models(X_tr_s, y_tr, X_te_s, y_te, MODEL_FEATURES, tune_best=False)
+      "
+    deps:
+      - src/models/train.py
+      - src/features/feature_engineering.py
+      - data/processed/engineered_features.csv
+    params:
+      - config/config.yaml:
+          - model.cross_validation_folds
+          - model.champion_selection_metric
+    outs:
+      - models/artifacts/champion_model.pkl
+      - models/artifacts/scaler.pkl
+      - models/artifacts/model_meta.json
+    metrics:
+      - models/metrics/model_comparison.csv:
+          cache: false
+
+  score_and_recommend:
+    cmd: python src/score.py
+      --input data/raw/saas_churn_dataset.csv
+      --output data/sample_outputs/nba_recommendations.csv
+      --threshold 0.50
+    deps:
+      - src/score.py
+      - src/nba_engine/archetype_classifier.py
+      - src/nba_engine/nba_engine.py
+      - src/clv/clv_calculator.py
+      - src/business_impact/impact_engine.py
+      - config/nba_rules.yaml
+      - models/artifacts/champion_model.pkl
+      - models/artifacts/scaler.pkl
+      - data/raw/saas_churn_dataset.csv
+    outs:
+      - data/sample_outputs/nba_recommendations.csv
+
+  generate_reports:
+    cmd: python src/utils/report_generator.py
+    deps:
+      - src/utils/report_generator.py
+      - data/sample_outputs/nba_recommendations.csv
+      - reports/shap/global_importance.csv
+    outs:
+      - reports/nba/executive_report.md
+      - reports/nba/executive_report.html

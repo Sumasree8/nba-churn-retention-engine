@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile
+    container_name: nba-churn-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../../models:/app/models
+      - ../../data:/app/data
+      - ../../config:/app/config
+      - ../../reports:/app/reports
+    environment:
+      - PYTHONPATH=/app
+      - LOG_LEVEL=INFO
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  dashboard:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile
+    container_name: nba-churn-dashboard
+    command: streamlit run dashboards/streamlit/app.py --server.port=8501 --server.address=0.0.0.0
+    ports:
+      - "8501:8501"
+    volumes:
+      - ../../models:/app/models
+      - ../../data:/app/data
+      - ../../config:/app/config
+      - ../../reports:/app/reports
+    environment:
+      - PYTHONPATH=/app
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:latest
+    container_name: nba-mlflow
+    ports:
+      - "5000:5000"
+    command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:///mlflow.db --default-artifact-root /mlflow_artifacts
+    volumes:
+      - mlflow_data:/mlflow_artifacts
+    restart: unless-stopped
+
+volumes:
+  mlflow_data:

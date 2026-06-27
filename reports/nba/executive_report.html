@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NBA Churn Retention Engine — Executive Report</title>
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; max-width: 1100px; margin: 40px auto;
+            padding: 0 24px; background: #f8f9fa; color: #212529; }
+    h1 { color: #e94560; border-bottom: 3px solid #e94560; padding-bottom: 8px; }
+    h2 { color: #0f3460; margin-top: 36px; }
+    table { border-collapse: collapse; width: 100%; margin: 16px 0; background: white;
+             border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+    th { background: #0f3460; color: white; padding: 10px 14px; text-align: left; font-weight: 600; }
+    td { padding: 9px 14px; border-bottom: 1px solid #e9ecef; }
+    tr:hover td { background: #f1f3f5; }
+    hr { border: none; border-top: 1px solid #dee2e6; margin: 28px 0; }
+    em { color: #6c757d; }
+    strong { color: #e94560; }
+    code { background: #f1f3f5; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+<h1>NBA Churn Retention Engine — Executive Report</h1>
+<p><em>Generated: 2026-06-15 15:58</em></p>
+<hr />
+<h2>📊 Campaign Overview</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>High-Risk Customers</td>
+<td><strong>3,050</strong></td>
+</tr>
+<tr>
+<td>Average Churn Probability</td>
+<td><strong>66.0%</strong></td>
+</tr>
+<tr>
+<td>Expected Revenue Saved (12 mo)</td>
+<td><strong>$1,111,006</strong></td>
+</tr>
+<tr>
+<td>Total Campaign Cost</td>
+<td><strong>$3,528</strong></td>
+</tr>
+<tr>
+<td>Net Incremental Profit</td>
+<td><strong>$773,470</strong></td>
+</tr>
+<tr>
+<td>Campaign ROI</td>
+<td><strong>21921%</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>👥 Churn Archetype Distribution</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Archetype</th>
+<th style="text-align: right;">Customers</th>
+<th style="text-align: left;">Avg Churn %</th>
+<th style="text-align: left;">Revenue Saved</th>
+<th style="text-align: left;">Top Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">👻 The Ghost</td>
+<td style="text-align: right;">939</td>
+<td style="text-align: left;">67.7%</td>
+<td style="text-align: left;">$352,500</td>
+<td style="text-align: left;">General Retention Email</td>
+</tr>
+<tr>
+<td style="text-align: left;">😤 Frustrated Professional</td>
+<td style="text-align: right;">246</td>
+<td style="text-align: left;">68.9%</td>
+<td style="text-align: left;">$148,857</td>
+<td style="text-align: left;">General Retention Email</td>
+</tr>
+<tr>
+<td style="text-align: left;">💸 Price-Sensitive Optimizer</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: left;">67.3%</td>
+<td style="text-align: left;">$7,458</td>
+<td style="text-align: left;">General Retention Email</td>
+</tr>
+<tr>
+<td style="text-align: left;">🚀 Outgrown User</td>
+<td style="text-align: right;">1836</td>
+<td style="text-align: left;">64.7%</td>
+<td style="text-align: left;">$602,191</td>
+<td style="text-align: left;">General Retention Email</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>🚨 Action Urgency Breakdown</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Urgency</th>
+<th style="text-align: right;">Count</th>
+<th style="text-align: left;">% of Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">🔴 Critical</td>
+<td style="text-align: right;">66</td>
+<td style="text-align: left;">2.2%</td>
+</tr>
+<tr>
+<td style="text-align: left;">🟠 High</td>
+<td style="text-align: right;">276</td>
+<td style="text-align: left;">9.0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">🟢 Low</td>
+<td style="text-align: right;">2697</td>
+<td style="text-align: left;">88.4%</td>
+</tr>
+<tr>
+<td style="text-align: left;">🟡 Medium</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">0.4%</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>💰 Top 10 Highest-Value Customers to Retain</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">customer_id</th>
+<th style="text-align: left;">subscription_type</th>
+<th style="text-align: right;">monthly_revenue</th>
+<th style="text-align: right;">churn_probability</th>
+<th style="text-align: left;">archetype_name</th>
+<th style="text-align: left;">action</th>
+<th style="text-align: right;">expected_revenue_saved</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">CUST-008902</td>
+<td style="text-align: left;">Enterprise</td>
+<td style="text-align: right;">4866.51</td>
+<td style="text-align: right;">0.904095</td>
+<td style="text-align: left;">Frustrated Professional</td>
+<td style="text-align: left;">Priority Support &amp; CS Outreach</td>
+<td style="text-align: right;">14783.3</td>
+</tr>
+<tr>
+<td style="text-align: left;">CUST-002034</td>
+<td style="text-align: left;">Enterprise</td>
+<td style="text-align: right;">4300.18</td>
+<td style="text-align: right;">0.921933</td>
+<td style="text-align: left;">Frustrated Professional</td>
+<td style="text-align: left;">Priority Support &amp; CS Outreach</td>
+<td style="text-align: right;">13320.6</td>
+</tr>
+<tr>
+<td style="text-align: left;">CUST-004322</td>
+<td style="text-align: left;">Enterprise</td>
+<td style="text-align: right;">4153.14</td>
+<td style="text-align: right;">0.766194</td>
+<td style="text-align: left;">Frustrated Professional</td>
+<td style="text-align: left;">Priority Support &amp; CS Outreach</td>
+<td style="text-align: right;">10691.9</td>
+</tr>
+<tr>
+<td style="text-align: left;">CUST-001335</td>
+<td style="text-align: left;">Enterprise</td>
+<td style="text-align: right;">3503.93</td>
+<td style="text-align: right;">0.743771</td>
+<td style="text-align: left;">Frustrated Professional</td>
+<td style="text-align: left;">Priority Support &amp; CS Outreach</td>
+<td style="text-align: right;">8756.56</td>
+</tr>
+<tr>
+<td style="text-align: left;">CUST-003077</td>
+<td style="text-align: left;">Enterprise</td>
+<td style="text-align: right;">3010.35</td>
+<td style="text-align: right;">0.740163</td>
+<td style="text-align: left;">Outgrown User</td>
+<td style="text-align: left;">Free 30-Day Premium Tier Trial</td>
+<td style="text-align: right;">8556.09</td>
+</tr>
+<tr>
+<td style="text-align: left;">CUST-005710</td>
+<td style="text-align: left;">Enterprise</td>
+<td style="text-align: right;">3441.34</td>
+<td style="text-align: right;">0.608824</td>
+<td style="text-align: left;">Outgrown User</td>
+<td style="text-align: left;">Free 30-Day Premium Tier Trial</td>
+<td style="text-align: right;">8045.46</td>
+</tr>
+<tr>
+<td style="text-align: left;">CUST-004471</td>
+<td style="text-align: left;">Enterprise</td>
+<td style="text-align: right;">4401.65</td>
+<td style="text-align: right;">0.861163</td>
+<td style="text-align: left;">The Ghost</td>
+<td style="text-align: left;">Re-Engagement Push Notification</td>
+<td style="text-align: right;">6822.97</td>
+</tr>
+<tr>
+<td style="text-align: left;">CUST-001024</td>
+<td style="text-align: left;">Enterprise</td>
+<td style="text-align: right;">4757.54</td>
+<td style="text-align: right;">0.759109</td>
+<td style="text-align: left;">The Ghost</td>
+<td style="text-align: left;">Re-Engagement Push Notification</td>
+<td style="text-align: right;">6500.68</td>
+</tr>
+<tr>
+<td style="text-align: left;">CUST-008087</td>
+<td style="text-align: left;">Enterprise</td>
+<td style="text-align: right;">4275.56</td>
+<td style="text-align: right;">0.786599</td>
+<td style="text-align: left;">The Ghost</td>
+<td style="text-align: left;">Re-Engagement Push Notification</td>
+<td style="text-align: right;">6053.67</td>
+</tr>
+<tr>
+<td style="text-align: left;">CUST-009001</td>
+<td style="text-align: left;">Enterprise</td>
+<td style="text-align: right;">4739.44</td>
+<td style="text-align: right;">0.709068</td>
+<td style="text-align: left;">The Ghost</td>
+<td style="text-align: left;">Re-Engagement Push Notification</td>
+<td style="text-align: right;">6049.05</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>🧠 Top 10 Churn Drivers (SHAP)</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">feature</th>
+<th style="text-align: right;">mean_abs_shap</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">engagement_decay_score</td>
+<td style="text-align: right;">0.142</td>
+</tr>
+<tr>
+<td style="text-align: left;">days_since_last_login</td>
+<td style="text-align: right;">0.121</td>
+</tr>
+<tr>
+<td style="text-align: left;">friction_score</td>
+<td style="text-align: right;">0.098</td>
+</tr>
+<tr>
+<td style="text-align: left;">pricing_sensitivity_score</td>
+<td style="text-align: right;">0.084</td>
+</tr>
+<tr>
+<td style="text-align: left;">retention_risk_score</td>
+<td style="text-align: right;">0.076</td>
+</tr>
+<tr>
+<td style="text-align: left;">support_sentiment</td>
+<td style="text-align: right;">0.068</td>
+</tr>
+<tr>
+<td style="text-align: left;">billing_page_visits</td>
+<td style="text-align: right;">0.059</td>
+</tr>
+<tr>
+<td style="text-align: left;">ticket_count</td>
+<td style="text-align: right;">0.051</td>
+</tr>
+<tr>
+<td style="text-align: left;">error_rate</td>
+<td style="text-align: right;">0.044</td>
+</tr>
+<tr>
+<td style="text-align: left;">velocity_30d_vs_90d</td>
+<td style="text-align: right;">0.041</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>📋 Recommended Actions Summary</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Action</th>
+<th style="text-align: right;">Customers</th>
+<th style="text-align: left;">Total Rev Saved ($)</th>
+<th style="text-align: right;">Avg Conversion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">General Retention Email</td>
+<td style="text-align: right;">2663</td>
+<td style="text-align: left;">$803,640</td>
+<td style="text-align: right;">0.08</td>
+</tr>
+<tr>
+<td style="text-align: left;">Re-Engagement Push Notification</td>
+<td style="text-align: right;">232</td>
+<td style="text-align: left;">$153,401</td>
+<td style="text-align: right;">0.15</td>
+</tr>
+<tr>
+<td style="text-align: left;">Priority Support &amp; CS Outreach</td>
+<td style="text-align: right;">66</td>
+<td style="text-align: left;">$95,323</td>
+<td style="text-align: right;">0.28</td>
+</tr>
+<tr>
+<td style="text-align: left;">Free 30-Day Premium Tier Trial</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: left;">$45,331</td>
+<td style="text-align: right;">0.32</td>
+</tr>
+<tr>
+<td style="text-align: left;">Recommended Content Campaign</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: left;">$5,323</td>
+<td style="text-align: right;">0.09</td>
+</tr>
+<tr>
+<td style="text-align: left;">Advanced Feature Unlock &amp; Upgrade Guide</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">$4,240</td>
+<td style="text-align: right;">0.2</td>
+</tr>
+<tr>
+<td style="text-align: left;">Annual Plan Upgrade Incentive</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">$1,445</td>
+<td style="text-align: right;">0.16</td>
+</tr>
+<tr>
+<td style="text-align: left;">Personalised Discount Offer (20-30%)</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">$886</td>
+<td style="text-align: right;">0.25</td>
+</tr>
+<tr>
+<td style="text-align: left;">Product Feedback Survey + Engineering Escalation</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">$853</td>
+<td style="text-align: right;">0.14</td>
+</tr>
+<tr>
+<td style="text-align: left;">Personalized Feature Discovery Email</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">$564</td>
+<td style="text-align: right;">0.12</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Report generated by NBA Churn Retention Engine v1.0.0</em></p>
+</body>
+</html>

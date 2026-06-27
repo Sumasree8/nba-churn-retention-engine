@@ -1,0 +1,69 @@
+# NBA Churn Retention Engine — Main Configuration
+# =================================================
+
+project:
+  name: "NBA Churn Retention Engine"
+  version: "1.0.0"
+  description: "Next-Best-Action churn retention platform for SaaS"
+
+data:
+  raw_path: "data/raw/saas_churn_dataset.csv"
+  processed_path: "data/processed/engineered_features.csv"
+  output_path: "data/sample_outputs/nba_recommendations.csv"
+  n_records: 50000
+  test_size: 0.20
+  random_state: 42
+
+features:
+  target_column: "churned"
+  id_column: "customer_id"
+  categorical_columns:
+    - subscription_type
+    - country
+    - industry
+  drop_columns:
+    - customer_id
+    - country
+    - industry
+
+model:
+  churn_threshold: 0.50
+  high_risk_threshold: 0.75
+  cross_validation_folds: 5
+  tune_hyperparams: false
+  champion_selection_metric: "roc_auc"
+  artifacts_dir: "models/artifacts"
+  metrics_dir: "models/metrics"
+
+shap:
+  background_samples: 2000
+  explain_top_n_features: 5
+  output_dir: "reports/shap"
+
+nba:
+  rules_path: "config/nba_rules.yaml"
+  output_dir: "reports/nba"
+
+clv:
+  discount_rate_annual: 0.10
+  horizon_months: 36
+
+business_impact:
+  campaign_reach_rate: 0.85
+  months_retained: 12
+  gross_margin: 0.70
+  overhead_multiplier: 1.20
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+  log_level: "info"
+
+mlflow:
+  tracking_uri: "http://localhost:5000"
+  experiment_name: "nba-churn-retention-engine"
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"
+  log_file: "pipeline.log"

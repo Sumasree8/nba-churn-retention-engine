@@ -1,0 +1,72 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Secrets & config
+.env
+*.pem
+*.key
+
+# Data files (large)
+data/raw/*.csv
+data/processed/*.csv
+data/sample_outputs/*.csv
+
+# ...but keep the small files the Streamlit dashboard needs to render on deploy
+!data/raw/saas_churn_dataset.csv
+!data/sample_outputs/nba_recommendations.csv
+
+# Model artifacts (track with MLflow or DVC instead)
+models/artifacts/*.pkl
+models/artifacts/*.json
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Testing
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+pipeline.log
+
+# MLflow
+mlruns/
+mlflow.db
+
+# Streamlit (keep config.toml, ignore secrets)
+.streamlit/secrets.toml
+
+# CatBoost training logs
+catboost_info/
+
+# Local SQLite database
+*.db
+
+# Docker
+*.tar

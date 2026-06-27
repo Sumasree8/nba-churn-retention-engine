@@ -1,0 +1,197 @@
+# Next-Best-Action Rule Engine Configuration
+# ==========================================
+# Rules are evaluated in priority order.
+# Each rule specifies conditions, the recommended action, and expected conversion rates.
+
+rules:
+  # ── Archetype A: The Ghost ─────────────────────────────────────────────────
+  - id: "A1"
+    name: "Ghost - Personalized Feature Discovery"
+    archetype: "A"
+    priority: 1
+    conditions:
+      engagement_decay_score_gte: 0.6
+      days_since_last_login_gte: 14
+    action: "Personalized Feature Discovery Email"
+    action_code: "EMAIL_FEATURE_DISCOVERY"
+    channel: "email"
+    urgency: "medium"
+    expected_conversion_rate: 0.12
+    cost_usd: 0.50
+    description: "Send a personalized email showcasing features the user hasn't explored."
+
+  - id: "A2"
+    name: "Ghost - Recommended Content Campaign"
+    archetype: "A"
+    priority: 2
+    conditions:
+      engagement_decay_score_gte: 0.4
+      sessions_30d_lte: 5
+    action: "Recommended Content Campaign"
+    action_code: "CONTENT_CAMPAIGN"
+    channel: "in-app + email"
+    urgency: "low"
+    expected_conversion_rate: 0.09
+    cost_usd: 0.25
+    description: "Surface tailored tutorials, case studies, and use-case guides."
+
+  - id: "A3"
+    name: "Ghost - Re-Engagement Notification"
+    archetype: "A"
+    priority: 3
+    conditions:
+      days_since_last_login_gte: 21
+    action: "Re-Engagement Push Notification"
+    action_code: "PUSH_REENGAGEMENT"
+    channel: "push + sms"
+    urgency: "high"
+    expected_conversion_rate: 0.15
+    cost_usd: 0.10
+    description: "Time-sensitive re-engagement nudge with personalised value prop."
+
+  # ── Archetype B: Frustrated Professional ──────────────────────────────────
+  - id: "B1"
+    name: "Frustrated - Priority Support Outreach"
+    archetype: "B"
+    priority: 1
+    conditions:
+      support_sentiment_lte: -0.2
+      ticket_count_gte: 3
+    action: "Priority Support & CS Outreach"
+    action_code: "CS_PRIORITY_OUTREACH"
+    channel: "phone + email"
+    urgency: "critical"
+    expected_conversion_rate: 0.28
+    cost_usd: 25.00
+    description: "Direct outreach from Customer Success with priority queue escalation."
+
+  - id: "B2"
+    name: "Frustrated - Live Onboarding Session"
+    archetype: "B"
+    priority: 2
+    conditions:
+      error_rate_gte: 0.10
+      friction_score_gte: 0.5
+    action: "Live Onboarding / Training Session"
+    action_code: "LIVE_ONBOARDING"
+    channel: "video call"
+    urgency: "high"
+    expected_conversion_rate: 0.22
+    cost_usd: 50.00
+    description: "Schedule a 1:1 product walk-through to resolve friction points."
+
+  - id: "B3"
+    name: "Frustrated - Product Feedback Loop"
+    archetype: "B"
+    priority: 3
+    conditions:
+      rage_click_count_gte: 3
+    action: "Product Feedback Survey + Engineering Escalation"
+    action_code: "FEEDBACK_ESCALATION"
+    channel: "in-app"
+    urgency: "medium"
+    expected_conversion_rate: 0.14
+    cost_usd: 5.00
+    description: "Collect structured feedback and flag to product engineering team."
+
+  # ── Archetype C: Price-Sensitive Optimizer ────────────────────────────────
+  - id: "C1"
+    name: "Price Sensitive - Discount Offer"
+    archetype: "C"
+    priority: 1
+    conditions:
+      downgrade_page_visits_gte: 2
+      billing_page_visits_gte: 3
+    action: "Personalised Discount Offer (20-30%)"
+    action_code: "DISCOUNT_OFFER"
+    channel: "email + in-app"
+    urgency: "high"
+    expected_conversion_rate: 0.25
+    cost_usd: 15.00
+    description: "Time-limited discount to lock in annual commitment and prevent churn."
+
+  - id: "C2"
+    name: "Price Sensitive - Pause Subscription"
+    archetype: "C"
+    priority: 2
+    conditions:
+      billing_page_visits_gte: 2
+      pricing_sensitivity_score_gte: 0.5
+    action: "Subscription Pause Option (1-3 months)"
+    action_code: "SUBSCRIPTION_PAUSE"
+    channel: "email"
+    urgency: "medium"
+    expected_conversion_rate: 0.18
+    cost_usd: 2.00
+    description: "Offer a pause instead of cancellation to retain the customer relationship."
+
+  - id: "C3"
+    name: "Price Sensitive - Annual Plan Incentive"
+    archetype: "C"
+    priority: 3
+    conditions:
+      pricing_sensitivity_score_gte: 0.3
+    action: "Annual Plan Upgrade Incentive"
+    action_code: "ANNUAL_UPGRADE_INCENTIVE"
+    channel: "email"
+    urgency: "low"
+    expected_conversion_rate: 0.16
+    cost_usd: 5.00
+    description: "Highlight savings from annual billing vs monthly; include ROI calculator."
+
+  # ── Archetype D: Outgrown User ─────────────────────────────────────────────
+  - id: "D1"
+    name: "Outgrown - Free Premium Trial"
+    archetype: "D"
+    priority: 1
+    conditions:
+      tier_capacity_utilization_gte: 0.85
+    action: "Free 30-Day Premium Tier Trial"
+    action_code: "PREMIUM_TRIAL"
+    channel: "in-app + email"
+    urgency: "high"
+    expected_conversion_rate: 0.32
+    cost_usd: 10.00
+    description: "Proactively unlock next-tier features before the user hits hard limits."
+
+  - id: "D2"
+    name: "Outgrown - Enterprise Consultation"
+    archetype: "D"
+    priority: 2
+    conditions:
+      api_limit_usage_gte: 0.80
+      seat_limit_usage_gte: 0.80
+    action: "Enterprise Consultation Call"
+    action_code: "ENTERPRISE_CONSULT"
+    channel: "phone + email"
+    urgency: "critical"
+    expected_conversion_rate: 0.38
+    cost_usd: 75.00
+    description: "Route to enterprise sales for custom pricing and contract discussion."
+
+  - id: "D3"
+    name: "Outgrown - Advanced Feature Unlock"
+    archetype: "D"
+    priority: 3
+    conditions:
+      growth_pressure_score_gte: 0.5
+    action: "Advanced Feature Unlock & Upgrade Guide"
+    action_code: "FEATURE_UNLOCK"
+    channel: "in-app"
+    urgency: "medium"
+    expected_conversion_rate: 0.20
+    cost_usd: 1.00
+    description: "Showcase advanced features only available on higher tiers."
+
+defaults:
+  fallback_action: "General Retention Email"
+  fallback_action_code: "GENERAL_RETENTION"
+  fallback_channel: "email"
+  fallback_expected_conversion_rate: 0.08
+  fallback_cost_usd: 0.50
+
+thresholds:
+  high_risk_churn_probability: 0.50
+  critical_risk_churn_probability: 0.75
+  clv_enterprise_threshold: 5000
+  clv_high_threshold: 1500
